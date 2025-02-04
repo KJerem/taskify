@@ -1,8 +1,7 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { Response } from "express";
 import { ErrorUtil } from "@utils/error.util";
 import { environment } from "@config/config";
-import { User } from "@domain/models";
+
 
 
 
@@ -31,14 +30,14 @@ export class JwtHelper {
     if (!this.atSecret || !this.atExpiresIn) {
       throw new Error("JWT Helper not initialized.");
     }
-    return jwt.sign(payload, this.atSecret, { expiresIn: this.atExpiresIn });
+    return jwt.sign(payload, this.atSecret, { expiresIn: parseInt(this.atExpiresIn) });
   }
 
   public static generateRefreshToken(payload: JwtPayload): string {
     if (!this.rtSecret || !this.rtExpiresIn) {
       throw new Error("JWT Helper not initialized.");
     }
-    return jwt.sign(payload, this.rtSecret, { expiresIn: this.rtExpiresIn });
+    return jwt.sign(payload, this.rtSecret, { expiresIn: parseInt(this.rtExpiresIn) });
   }
 
   // Static method to verify token

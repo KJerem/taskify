@@ -11,4 +11,6 @@ export const environment = {
   jwtATExpiresIn: String(process.env.JWT_ACCESS_TOKEN_EXPIRES_IN),
   jwtRTExpiresIn: String(process.env.JWT_REFRESH_TOKEN_EXPIRES_IN),
   bcryptSaltRounds: parseInt(String(process.env.BCRYPT_SALT_ROUNDS), 10),
+  uploadthingSecret: String(process.env.UPLOADTHING_SECRET),
+  uploadthingAppId: String(process.env.UPLOADTHING_APP_ID),
 };

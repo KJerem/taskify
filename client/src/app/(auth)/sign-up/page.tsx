@@ -1,10 +1,20 @@
 "use client";
 
-
+import { useEffect } from "react";
+import { redirect } from "next/navigation";
 import { SignUpCard } from "@/features/auth/components/sign-up-card";
+import { useLoadUserQuery } from "@/redux/features/api/apiSlice";
 
 const SignUp = () => {
-    return <SignUpCard />;
-}
+  const { data, isSuccess } = useLoadUserQuery(undefined);
 
-export default SignUp
+  useEffect(() => {
+    if (data && isSuccess) {
+      redirect("/");
+    }
+  }, [data, isSuccess]);
+  return <SignUpCard />;
+};
+
+export default SignUp;
+

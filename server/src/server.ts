@@ -8,6 +8,7 @@ import path from "path";
 import authRoutes from "./infra/routes/auth.routes";
 import tagRoutes from "./infra/routes/tags.routes";
 import taskRoutes from "./infra/routes/tasks.routes";
+import workspaceRoutes from "./infra/routes/workspaces.routes";
 import { errorHandler } from "./presentation/http/middlewares/error-handler.middleware";
 
 import { environment } from "./config/config";
@@ -35,6 +36,7 @@ app.use(errorHandler);
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/tags", tagRoutes);
 app.use("/api/v1/tasks", taskRoutes);
+app.use("/api/v1/workspaces", workspaceRoutes);
 
 const PORT = environment.port;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

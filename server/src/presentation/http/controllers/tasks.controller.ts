@@ -20,6 +20,7 @@ export class TaskController {
     try {
       if (!req.user || !req.user.id) {
         res.status(403).json({ error: "User is not authenticated" });
+        return;
       }
 
       const taskData = {
@@ -36,7 +37,12 @@ export class TaskController {
 
   async getTasksByUser(req: Request, res: Response) {
     try {
-      const tasks = await this.getTasksByUserIdUseCase.execute(req.params.id);
+      if (!req.user?.id) {
+        res.status(403).json({ error: "User is not authenticated" });
+        return;
+      }
+
+      const tasks = await this.getTasksByUserIdUseCase.execute(req.user?.id);
       res.status(201).json({ succeed: true, tasks });
     } catch (error: any) {
       res.status(400).json({ error: error.message });
